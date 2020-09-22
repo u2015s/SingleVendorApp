@@ -5,33 +5,24 @@ import { material } from 'react-native-typography'
 import AppColors from '../../assests/AppColor'
 import {AuthContext} from '../Navigation/AuthProvider'
 import Toolbar from '../Components/Toolbar'
-import BottomNavigation from '../Components/BottomNavigation'
-export const Home = ({navigation}) =>{
-   const {logout} = useContext(AuthContext)
-  function onIconPress(){
-    console.log('pressed')
-  }
+import { CommonActions } from '@react-navigation/native';
+export const Cart = ({navigation}) =>{
+
    return(
      <>
      <Toolbar
-     navigation={navigation}
-     title={'Home'}
-     onIconPress={()=>{navigation.openDrawer()}}
-     showDrawer={true}
-     showIcons={true}
+     title={'Cart'}
+     onIconPress={()=>{navigation.dispatch(CommonActions.goBack())}}
+     showDrawer={false}
+     showIcons={false}
      />
      <Text> 
-       <Button
-       onPress={() =>{ 
-         console.log('helo') 
-         logout()}}
-       title='SignOUt'
-       />
+       Cart
        
     </Text>
-     <BottomNavigation/>
+     
      </>
     
          )
 }
-export default Home
+export default Cart
