@@ -10,7 +10,7 @@ export default {
     lightWhite: "#eee",
     lightWhitemore: "#ccc",
     deepblue: "#19025e",
-
+    tintColor:'blue',
     semiblack: "#222",
     black: "#000",
     grey: "#aaa",

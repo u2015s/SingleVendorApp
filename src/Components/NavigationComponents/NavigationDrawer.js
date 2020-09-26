@@ -2,9 +2,9 @@ import React,{ Component, useState, useEffect,useContext} from 'react'
 import {Alert,ActivityIndicator ,View,Text,StyleSheet,SafeAreaView, TextInput,Image,Pressable, Button,TouchableOpacity,ScrollView} from 'react-native'
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { material } from 'react-native-typography'
-import AppColors from '../../assests/AppColor'
-import {AuthContext} from '../Navigation/AuthProvider'
-import Toolbar from '../Components/Toolbar'
+import AppColors from '../../../assests/AppColor'
+import {AuthContext} from '../../Navigation/AuthProvider'
+import Toolbar from './Toolbar'
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import {
@@ -12,7 +12,8 @@ import {
     DrawerContentScrollView,
   } from '@react-navigation/drawer';
 export const NavigationDrawer = ({navigation}) =>{
-  
+    const {logout} = useContext(AuthContext)
+
    return(
      <>
      
@@ -47,7 +48,8 @@ export const NavigationDrawer = ({navigation}) =>{
                 icon={({ focused, color, size }) => <Icon color={color} size={size} name={focused ? 'location-arrow' : 'location-arrow'} />}
                 label="My orders"
                 labelStyle={styles.labelStyle}
-                onPress={(focused) => {this.props.navigation.navigate('Navigation')}}
+                onPress={(focused) => {navigation.closeDrawer()
+                                    navigation.navigate('MyOrder')}}
                 activeTintColor={AppColors.primary}
                 // inactiveBackgroundColor={AppColors.primary}
             />
@@ -161,7 +163,7 @@ export const NavigationDrawer = ({navigation}) =>{
                     />)}
                     label="SignOut"
                     labelStyle={[styles.labelStyle,]}
-                    onPress={() => {}}
+                    onPress={() =>{logout()}}
                 />
                 </View>
             </View>

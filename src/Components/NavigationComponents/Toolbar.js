@@ -2,8 +2,8 @@ import React,{ Component, useState, useEffect,useContext} from 'react'
 import {Alert,ActivityIndicator ,View,Text,StyleSheet,SafeAreaView, TextInput,Image,Pressable, Button,TouchableOpacity,ScrollView} from 'react-native'
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { material } from 'react-native-typography'
-import AppColors from '../../assests/AppColor'
-import {AuthContext} from '../Navigation/AuthProvider'
+import AppColors from '../../../assests/AppColor'
+import {AuthContext} from '../../Navigation/AuthProvider'
 import Icon from 'react-native-vector-icons/Ionicons';
 export const Toolbar = ({title,onIconPress,showDrawer,showIcons,navigation}) =>{
    const {logout} = useContext(AuthContext)
@@ -23,7 +23,6 @@ export const Toolbar = ({title,onIconPress,showDrawer,showIcons,navigation}) =>{
             onPress={onIconPress}
             backgroundColor={'transparent'}
             underlayColor="transparent" 
-
             />
         </View>
 

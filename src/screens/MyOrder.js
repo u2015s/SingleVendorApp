@@ -6,23 +6,22 @@ import AppColors from '../../assests/AppColor'
 import {AuthContext} from '../Navigation/AuthProvider'
 import Toolbar from '../Components/NavigationComponents/Toolbar'
 import { CommonActions } from '@react-navigation/native';
-export const Cart = ({navigation}) =>{
+export const MyOrder = ({navigation}) =>{
 
    return(
      <>
      <Toolbar
-     title={'Cart'}
+     title={'My Orders'}
      onIconPress={()=>{navigation.dispatch(CommonActions.goBack())}}
      showDrawer={false}
      showIcons={false}
      />
      <Text> 
-       Cart
-       
+      My Orders    
     </Text>
      
      </>
     
          )
 }
-export default Cart
+export default MyOrder

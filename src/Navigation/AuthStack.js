@@ -2,8 +2,8 @@ import React,{ Component, useState, useEffect} from 'react'
 import { createStackNavigator } from '@react-navigation/stack';
 import Register from '../screens/Register';
 import LogIn from './../screens/Login';
-import OTPv from './../screens/OtpV'
-import OTPv2 from './../screens/OtpV2'
+// import OTPv from './../screens/OtpV'
+// import OTPv2 from './../screens/OtpV2'
 import Fpassword from './../screens/ForgotPassword'
 const Stack = createStackNavigator();
 export const AuthStack = () =>{
