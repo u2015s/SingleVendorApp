@@ -6,6 +6,8 @@ import AppColors from '../../assests/AppColor'
 import {AuthContext} from '../Navigation/AuthProvider'
 import Toolbar from '../Components/NavigationComponents/Toolbar'
 import ProductImageList from '../Components/ProductDetailsComponents/ProductImageList'
+import ReviewContainer from '../Components/ProductDetailsComponents/ReviewContainer'
+
 import { CommonActions } from '@react-navigation/native'
 import Icon from 'react-native-vector-icons/Ionicons'
 import Share from "react-native-share";
@@ -21,6 +23,40 @@ export const ProductDetails = ({navigation,route}) =>{
       "https://blog.bookbaby.com/wp-content/uploads/2015/11/Perceptions.jpg"
     ]
     item.description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+    item.comments=[{
+      "buyerName":"Akash Kumar Singh",
+      "reviewTitle":"Nice Product!!",
+      "review":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambledssss",
+      "time":"14 Dec 2020",
+      "starsGiven":3.5,
+      "images":[
+        "https://miro.medium.com/max/9096/0*8CyXXWXRHJLkn72_.",
+        "https://images.financialexpress.com/2018/10/review.jpg"
+      ],
+    },
+    {
+      "buyerName":"Utkarsh Singh",
+      "reviewTitle":"Nice Product!!",
+      "review":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambledssss",
+      "time":"12 Aug 2020",
+      "starsGiven":3.5,
+      "images":[
+        "https://miro.medium.com/max/9096/0*8CyXXWXRHJLkn72_.",
+        "https://images.financialexpress.com/2018/10/review.jpg"
+      ]
+    },
+    {
+      "buyerName":"Arnab Goswami",
+      "reviewTitle":"Nice Product!!",
+      "review":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambledssss",
+      "time":"12 Aug 2020",
+      "starsGiven":3.5,
+      "images":[
+        "https://miro.medium.com/max/9096/0*8CyXXWXRHJLkn72_.",
+        "https://images.financialexpress.com/2018/10/review.jpg"
+      ]
+    }]
+    
     function calOff(item){
       // console.log(Number(item.MRP))
       var off = Number(item.MRP)-Number(item.price)
@@ -62,6 +98,9 @@ export const ProductDetails = ({navigation,route}) =>{
     }
    return(
      <>
+     <ScrollView
+     contentContainerStyle={styles.container}
+     >
      <Toolbar
      title={'Product Details'}
      onIconPress={()=>{navigation.dispatch(CommonActions.goBack())}}
@@ -144,15 +183,28 @@ export const ProductDetails = ({navigation,route}) =>{
           // width: wp('100%')
         }}
          />
-         <View style={styles.ratingsContainer}> 
+         
+      </View>
+      <View style={styles.ratingsContainer}> 
             <Text style={styles.ratingsText}>
               Ratings & Reviews
             </Text>
-         </View>
+
+          {
+            item.comments.map((item,index)=>(
+            <ReviewContainer
+            item={item}
+            key={index}
+            />
+            ))
+          }
+            
       </View>
        {/* </View> */}
        
      </View>
+     </ScrollView>
+    
      
      </>
     
@@ -162,7 +214,7 @@ export default ProductDetails
 
 const styles = StyleSheet.create({
 container:{
-  flex:1
+  flexGrow: 1
 },
 imageContainer:{
 // backgroundColor:"red",
@@ -226,6 +278,8 @@ cardImage:{
     },
     ratingsContainer:{
       marginTop:hp(1),
+      paddingLeft:wp(3),
+     paddingBottom:hp(2)
     },
     ratingsText:{
       ...material.body1,
