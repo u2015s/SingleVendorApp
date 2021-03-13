@@ -15,11 +15,15 @@ import HomeStack from './src/Navigation/HomeStack'
 import AuthStack from './src/Navigation/AuthStack'
 import Routes from './src/Navigation/Routes';
 import { AuthProvider } from './src/Navigation/AuthProvider';
+import {CartProvider,CartContext} from './src/Components/CartProvider'
+
 const App = ()=> {
   
   return (
   <AuthProvider>
+  
     <Routes/>
+    
   </AuthProvider>
     
   );

@@ -87,14 +87,14 @@ function ratingCompleted(rating) {
           </View>
           {/* <StarRating/> */}
           <StarRating
-        disabled={true}
-        maxStars={5}
-        rating={item.rating}
-        // selectedStar={(rating) => onStarRatingPress(rating)}
-        activeOpacity={1}
-        starSize={20}
-        starStyle={{color:AppColors.primary}}
-      />
+            disabled={true}
+            maxStars={5}
+            rating={item.rating}
+            // selectedStar={(rating) => onStarRatingPress(rating)}
+            activeOpacity={1}
+            starSize={20}
+            starStyle={{color:AppColors.primary}}
+          />
           {/* <AirbnbRating /> */}
           {/* <AirbnbRating
         count={5}

@@ -14,14 +14,13 @@ import { NavigationContainer } from '@react-navigation/native';
 import HomeStack from './HomeStack'
 import AuthStack from './AuthStack'
 import {ProductProvider} from '../Components/ProductProvider'
-
 const App = ()=> {
-  const { user, setUser } = useContext(AuthContext);
-  
+  const { user, setUser,getDetails } = useContext(AuthContext);
+
   const [initializing, setInitializing] = useState(true);
   function onAuthStateChanged(user){
     setUser(user);
-    
+    getDetails(user)
     // if(!user){
     //   getToken()
     // }
@@ -42,7 +41,7 @@ const App = ()=> {
     <NavigationContainer>
       {user ?
       <ProductProvider>
-        <HomeStack /> 
+          <HomeStack /> 
       </ProductProvider>
       :
     <AuthStack />}

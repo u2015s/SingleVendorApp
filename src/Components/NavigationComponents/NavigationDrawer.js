@@ -118,8 +118,10 @@ export const NavigationDrawer = ({navigation}) =>{
                 size={25}
                 />)}
                 label="Account Settings"
+                onPress={(focused) => {
+                    navigation.closeDrawer()
+                    navigation.navigate('AccountSetting')}}
                 labelStyle={[styles.labelStyle, {marginLeft:wp('3.5%')}]}
-                onPress={() => {}}
             />
              <DrawerItem
                 icon={() => ( <Icon

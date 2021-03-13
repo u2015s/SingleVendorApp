@@ -5,9 +5,27 @@ export const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) =>{
     const [user, setUser] = useState(null);
+    const [userDetail, setuserDetail] = useState(null);
+
+    function getDetails(user){
+
+      if(user){
+        firestore()
+        .collection('users')
+        .doc(user.uid)
+        .get()
+        .then((res)=>{
+            // console.log(res.data())
+            setuserDetail(res.data())
+        })
+        .catch(e=>{console.log(e)});
+      }
+      
+    }
    return(
    <AuthContext.Provider
     value={{
+      userDetail,
       user,
       setUser,
       login: async (email, password) => {
@@ -70,7 +88,8 @@ export const AuthProvider = ({ children }) =>{
         } catch (e) {
           console.error(e);
         }
-      }
+      },
+      getDetails
     }}
   >
     {children}

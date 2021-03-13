@@ -8,6 +8,8 @@ import Toolbar from '../Components/NavigationComponents/Toolbar'
 import ProductImageList from '../Components/ProductDetailsComponents/ProductImageList'
 import ReviewContainer from '../Components/ProductDetailsComponents/ReviewContainer'
 import RatingContainer from '../Components/ProductDetailsComponents/RatingContainer'
+// import {CartContext} from '../Components/CartProvider'
+import {CartProvider,CartContext} from '../Components/CartProvider'
 
 import { CommonActions } from '@react-navigation/native'
 import Icon from 'react-native-vector-icons/Ionicons'
@@ -17,6 +19,9 @@ import {ProductContext} from '../Components/ProductProvider'
 import { Button } from 'react-native-paper'
 
 export const ProductDetails = ({navigation,route}) =>{
+  // const [cart, updateCart] = useState({})
+  const { cart, updateCart } = useContext(CartContext)
+  const [addCart,setaddCart]= useState(false)
     // console.log(route.params.item)
     const {Product}=useContext(ProductContext)
     const [heartIcon,setHeartIcon]=useState(true)
@@ -41,11 +46,11 @@ export const ProductDetails = ({navigation,route}) =>{
       })
       return (rating/num)
     }
+
     Product.forEach((prod)=>{
-      item = prod
       if(prod.id==route.params.item.id){
           prod.moreimages=[
-            item.src,
+            route.params.item.src,
             "https://i.pinimg.com/originals/8a/56/a9/8a56a9922e8339f7be5536dc2cccc79d.png",
             "https://blog.bookbaby.com/wp-content/uploads/2015/11/Perceptions.jpg"
           ]
@@ -61,53 +66,12 @@ export const ProductDetails = ({navigation,route}) =>{
               "https://images.financialexpress.com/2018/10/review.jpg"
             ],
           },
-          {
-            "buyerName":"Utkarsh Singh",
-            "reviewTitle":"Nice Product!!",
-            "review":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambledssss",
-            "time":"12 Aug 2020",
-            "starsGiven":4,
-            "images":[
-              "https://miro.medium.com/max/9096/0*8CyXXWXRHJLkn72_.",
-              "https://images.financialexpress.com/2018/10/review.jpg"
-            ]
-          },
-          {
-            "buyerName":"Arnab Goswami",
-            "reviewTitle":"Nice Product!!",
-            "review":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambledssss",
-            "time":"12 Aug 2020",
-            "starsGiven":5,
-            "images":[
-              "https://miro.medium.com/max/9096/0*8CyXXWXRHJLkn72_.",
-              "https://images.financialexpress.com/2018/10/review.jpg"
-            ]
-          },
-          {
-            "buyerName":"Arnab Goswami",
-            "reviewTitle":"Nice Product!!",
-            "review":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambledssss",
-            "time":"12 Aug 2020",
-            "starsGiven":5,
-            "images":[
-              "https://miro.medium.com/max/9096/0*8CyXXWXRHJLkn72_.",
-              "https://images.financialexpress.com/2018/10/review.jpg"
-            ]
-          },
-          {
-            "buyerName":"Arnab Goswami",
-            "reviewTitle":"Nice Product!!",
-            "review":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambledssss",
-            "time":"12 Aug 2020",
-            "starsGiven":1,
-            "images":[
-              "https://miro.medium.com/max/9096/0*8CyXXWXRHJLkn72_.",
-              "https://images.financialexpress.com/2018/10/review.jpg"
-            ]
-          }]
+          ]
           prod.totalRatings=prod.comments.length,
           prod.totalReviews= calReviews(prod),
           prod.rating=calRating(prod)
+
+          item = prod
       }
     })
     // console.log(Product[0].comments)
@@ -155,15 +119,34 @@ export const ProductDetails = ({navigation,route}) =>{
     }
    return(
      <>
+     {/* <CartContext.Consumer>
+     {({Cart}) => ( */}
+     <Toolbar
+            title={'Product Details'}
+            // cartItemNumbers={Cart.size}
+            navigation={navigation}
+            onIconPress={()=>{navigation.dispatch(CommonActions.goBack())}}
+            showDrawer={false}
+            showIconCart={true}
+            showIconSearch={true}
+            showIconNoti={false}
+      /> 
+       {/* )} */}
+        
+        {/* </CartContext.Consumer> */}
      <ScrollView
      contentContainerStyle={styles.container}
-     >
-     <Toolbar
-     title={'Product Details'}
-     onIconPress={()=>{navigation.dispatch(CommonActions.goBack())}}
-     showDrawer={false}
-     showIcons={false}
-     />
+    >
+    {/* <CartProvider> */}
+    {/* <CartProvider> */}
+           
+    {/* </CartProvider> */}
+
+      
+         
+    {/* </CartProvider> */}
+    
+
      <View style={styles.container}>
        {/* <View style={styles.imageContainer}> */}
        <ProductImageList
@@ -242,7 +225,8 @@ export const ProductDetails = ({navigation,route}) =>{
          />
          
       </View>
-      <View style={styles.ratingsContainer}> 
+
+      {/* <View style={styles.ratingsContainer}> 
             <Text style={styles.ratingsText}>
               Ratings & Reviews
             </Text>
@@ -285,7 +269,7 @@ export const ProductDetails = ({navigation,route}) =>{
             ))
           }
             
-      </View>
+      </View> */}
        {/* </View> */}
        
      </View>
@@ -299,7 +283,11 @@ export const ProductDetails = ({navigation,route}) =>{
           Buy Now
         </Button>
 
-        <Button mode="contained" onPress={() => console.log('Pressed')}
+        <Button mode="contained" onPress={() => {
+          // console.log(item)
+          setaddCart(true)
+          updateCart(item.id)
+        }}
         style={styles.button}
         color={AppColors.primary}
         >

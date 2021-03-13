@@ -43,8 +43,11 @@ export const Home = ({navigation}) =>{
       title={'Home'}
       onIconPress={()=>{navigation.openDrawer()}}
       showDrawer={true}
-      showIcons={true}
+      showIconCart={true}
+      showIconSearch={true}
+      showIconNoti={true}
       />
+      
       <ScrollView 
         contentContainerStyle={styles.container}
       //  contentContainerStyle={{ flexGrow: 1 }}

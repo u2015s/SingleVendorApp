@@ -74,7 +74,8 @@ export const ProductContainer= ({navigation}) =>{
         <ProductCard
         navigation={navigation}
           item={item}
-          />)}
+          />
+          )}
         keyExtractor={item => item.id}
         numColumns={2}
       />

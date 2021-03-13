@@ -3,15 +3,20 @@ import Home from './../screens/Home';
 import Cart from './../screens/Cart'
 import MyOrder from './../screens/MyOrder'
 import ProductDetails from './../screens/ProductDetails'
+import OrderSummary from './../screens/OrderSummary'
+import AccountSettings from './../screens/AccountSettings'
+import EditProfileInfo from './../screens/EditProfileInfo'
+import Address from './../screens/Address'
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import NavigationDrawer from '../Components/NavigationComponents/NavigationDrawer'
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { CardStyleInterpolators } from '@react-navigation/stack';
+import {CartProvider,CartContext} from '../Components/CartProvider'
 
 const Drawer = createDrawerNavigator()
 const DrawerNavigator = () => (
-    <Drawer.Navigator s
+    <Drawer.Navigator
     initialRouteName='Home' 
     screenOptions={{
         headerShown: false,
@@ -30,6 +35,8 @@ const DrawerNavigator = () => (
 )
 const Homenavigator = createStackNavigator();
 const HNavigator = ()=>(
+    // <CartProvider>
+
         <Homenavigator.Navigator
             screenOptions={{
                 headerShown: false,
@@ -40,6 +47,7 @@ const HNavigator = ()=>(
                 name="Home"
                 component={DrawerNavigator}
                 />
+                
                 <Homenavigator.Screen
                 name="Cart"
                 component={Cart}
@@ -54,13 +62,32 @@ const HNavigator = ()=>(
                 component={ProductDetails}
                 
                 />
+                <Homenavigator.Screen
+                name="OrderSummary"
+                component={OrderSummary}
+                
+                />
+                <Homenavigator.Screen
+                name="AccountSetting"
+                component={AccountSettings}
+                />
+                <Homenavigator.Screen
+                name="EditProfileInfo"
+                component={EditProfileInfo}
+                />
+                <Homenavigator.Screen
+                name="Address"
+                component={Address}
+                />
         </Homenavigator.Navigator>
+        // </CartProvider>
+
 )
 export const HomeStack = () =>{
    return(
-       
+    <CartProvider>
        <HNavigator/> 
-       
+    </CartProvider>
          )
 }
 export default HomeStack
