@@ -5,6 +5,7 @@ import { material } from 'react-native-typography'
 import AppColors from '../../../assests/AppColor'
 import {AuthContext} from '../../Navigation/AuthProvider'
 import Icon from 'react-native-vector-icons/Ionicons';
+import Ripple from 'react-native-material-ripple';
 export const Toolbar = ({title,onIconPress,showDrawer,showIcons,navigation}) =>{
    const {logout} = useContext(AuthContext)
 //    const {title,onIconPress,showDrawer} = props
@@ -16,14 +17,19 @@ export const Toolbar = ({title,onIconPress,showDrawer,showIcons,navigation}) =>{
     <View style={styles.logocontainer}>	
 
         <View style={styles.iconView}>
-            <Icon.Button
-            name={showDrawer ? "menu":"arrow-back"}
-            size={30}
-            color={'white'}
-            onPress={onIconPress}
-            backgroundColor={'transparent'}
-            underlayColor="transparent" 
-            />
+        <Ripple
+        rippleCentered={true}
+        onPress={onIconPress}
+        >
+          <Icon.Button
+              name={showDrawer ? "menu":"arrow-back"}
+              size={30}
+              color={'white'}
+              backgroundColor={'transparent'}
+              underlayColor="transparent" 
+              />
+        </Ripple>
+            
         </View>
 
         <View style={styles.textView}>
@@ -33,36 +39,55 @@ export const Toolbar = ({title,onIconPress,showDrawer,showIcons,navigation}) =>{
         </View>
 
         {showIcons?
-         <View style={styles.IconContainer}>
-         <Icon.Button
-         name={"search"}
-         size={25}
-         color={'white'}
-         style={styles.iconStyle}
-         backgroundColor={'transparent'}
-         underlayColor="transparent" 
+        <>
+        <View style={styles.IconContainer}>
+          <Ripple
+          rippleCentered={true}
 
-         />
-         <Icon.Button
-         name={"notifications"}
-         size={25}
-         color={'white'}
-         style={styles.iconStyle}
-         backgroundColor={'transparent'}
-         underlayColor="transparent" 
+          >
+              <Icon.Button
+            name={"search"}
+            size={25}
+            color={'white'}
+            style={styles.iconStyle}
+            backgroundColor={'transparent'}
+            underlayColor="transparent" 
 
-         />
-         <Icon.Button
-         name={"cart"}
-         size={25}
-         color={'white'}
-         iconStyle={styles.iconStyle}
-         onPress={()=>{navigation.navigate('Cart')}}
-         backgroundColor={'transparent'}
-         underlayColor="transparent" 
-         />
+            />
+          </Ripple>
+         <Ripple
+         rippleCentered={true}
+
+         >
+          <Icon.Button
+          name={"notifications"}
+          size={25}
+          color={'white'}
+          style={styles.iconStyle}
+          backgroundColor={'transparent'}
+          underlayColor="transparent" 
+
+          />
+         </Ripple>
          
+         <Ripple
+         rippleCentered={true}
+         
+         >
+            <Icon.Button
+            name={"cart"}
+            size={25}
+            color={'white'}
+            iconStyle={styles.iconStyle}
+            onPress={()=>{navigation.navigate('Cart')}}
+            backgroundColor={'transparent'}
+            underlayColor="transparent" 
+            />
+         </Ripple>
+        
          </View>
+        </>
+         
          :null}
        
     </View>

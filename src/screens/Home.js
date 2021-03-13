@@ -9,6 +9,8 @@ import Toolbar from '../Components/NavigationComponents/Toolbar'
 import CategoryList from '../Components/HomeComponents/CategoryList'
 import BannerList from '../Components/HomeComponents/BannerList'
 import ProductContainer from '../Components/HomeComponents/ProductContainer'
+import {ProductContext} from '../Components/ProductProvider'
+
 const bannerData =[
   {      name:"Shirts",
       icon:"https://image.freepik.com/free-vector/modern-sale-banner-with-product-description_1361-1259.jpg"
@@ -28,6 +30,8 @@ const bannerData =[
  
   ]
 export const Home = ({navigation}) =>{
+  const {Product}=useContext(ProductContext)
+  // console.log(Product[0].comments)
   function onIconPress(){
     console.log('pressed')
   }
@@ -37,7 +41,7 @@ export const Home = ({navigation}) =>{
       <Toolbar
       navigation={navigation}
       title={'Home'}
-      onIconPress={()=>{nasvigation.openDrawer()}}
+      onIconPress={()=>{navigation.openDrawer()}}
       showDrawer={true}
       showIcons={true}
       />

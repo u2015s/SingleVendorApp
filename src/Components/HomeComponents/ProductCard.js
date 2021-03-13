@@ -7,6 +7,9 @@ import {AuthContext} from '../../Navigation/AuthProvider'
 import Toolbar from '../NavigationComponents/Toolbar'
 import { CommonActions } from '@react-navigation/native';
 import { Rating, AirbnbRating } from 'react-native-ratings';
+// import StarRating from '../ProductDetailsComponents/StarRating'
+import StarRating from 'react-native-star-rating';
+
 // const star = require('../../assests/star.png')
 export const ProductCard = ({navigation,item}) =>{
 // const item = {
@@ -82,6 +85,16 @@ function ratingCompleted(rating) {
               {/* </View> */}
             
           </View>
+          {/* <StarRating/> */}
+          <StarRating
+        disabled={true}
+        maxStars={5}
+        rating={item.rating}
+        // selectedStar={(rating) => onStarRatingPress(rating)}
+        activeOpacity={1}
+        starSize={20}
+        starStyle={{color:AppColors.primary}}
+      />
           {/* <AirbnbRating /> */}
           {/* <AirbnbRating
         count={5}

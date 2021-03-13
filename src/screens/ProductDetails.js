@@ -1,5 +1,5 @@
 import React,{ Component, useState, useEffect,useContext} from 'react'
-import {Alert,ActivityIndicator ,View,Text,StyleSheet,SafeAreaView, TextInput,Image,Pressable, Button,TouchableOpacity,ScrollView} from 'react-native'
+import {Alert,ActivityIndicator ,View,Text,StyleSheet,SafeAreaView, TextInput,Image,Pressable,TouchableOpacity,ScrollView} from 'react-native'
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { material } from 'react-native-typography'
 import AppColors from '../../assests/AppColor'
@@ -7,56 +7,113 @@ import {AuthContext} from '../Navigation/AuthProvider'
 import Toolbar from '../Components/NavigationComponents/Toolbar'
 import ProductImageList from '../Components/ProductDetailsComponents/ProductImageList'
 import ReviewContainer from '../Components/ProductDetailsComponents/ReviewContainer'
+import RatingContainer from '../Components/ProductDetailsComponents/RatingContainer'
 
 import { CommonActions } from '@react-navigation/native'
 import Icon from 'react-native-vector-icons/Ionicons'
 import Share from "react-native-share";
 import ReadMore from 'react-native-read-more-text';
+import {ProductContext} from '../Components/ProductProvider'
+import { Button } from 'react-native-paper'
 
 export const ProductDetails = ({navigation,route}) =>{
     // console.log(route.params.item)
+    const {Product}=useContext(ProductContext)
     const [heartIcon,setHeartIcon]=useState(true)
-    var item = route.params.item
-    item.moreimages=[
-      item.src,
-      "https://i.pinimg.com/originals/8a/56/a9/8a56a9922e8339f7be5536dc2cccc79d.png",
-      "https://blog.bookbaby.com/wp-content/uploads/2015/11/Perceptions.jpg"
-    ]
-    item.description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-    item.comments=[{
-      "buyerName":"Akash Kumar Singh",
-      "reviewTitle":"Nice Product!!",
-      "review":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambledssss",
-      "time":"14 Dec 2020",
-      "starsGiven":3.5,
-      "images":[
-        "https://miro.medium.com/max/9096/0*8CyXXWXRHJLkn72_.",
-        "https://images.financialexpress.com/2018/10/review.jpg"
-      ],
-    },
-    {
-      "buyerName":"Utkarsh Singh",
-      "reviewTitle":"Nice Product!!",
-      "review":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambledssss",
-      "time":"12 Aug 2020",
-      "starsGiven":3.5,
-      "images":[
-        "https://miro.medium.com/max/9096/0*8CyXXWXRHJLkn72_.",
-        "https://images.financialexpress.com/2018/10/review.jpg"
-      ]
-    },
-    {
-      "buyerName":"Arnab Goswami",
-      "reviewTitle":"Nice Product!!",
-      "review":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambledssss",
-      "time":"12 Aug 2020",
-      "starsGiven":3.5,
-      "images":[
-        "https://miro.medium.com/max/9096/0*8CyXXWXRHJLkn72_.",
-        "https://images.financialexpress.com/2018/10/review.jpg"
-      ]
-    }]
+    var item
+   
+    function calReviews(item){
+      var reviews=0
+      item.comments.forEach((item)=>{
+        if(item.review){
+          reviews=reviews+1
+        }
+      })
+      return reviews
+     
+    }
+    function calRating(item){
+      var rating=0
+      var num=0
+      item.comments.forEach((item)=>{
+          rating=rating+item.starsGiven
+          num=num+1
+      })
+      return (rating/num)
+    }
+    Product.forEach((prod)=>{
+      item = prod
+      if(prod.id==route.params.item.id){
+          prod.moreimages=[
+            item.src,
+            "https://i.pinimg.com/originals/8a/56/a9/8a56a9922e8339f7be5536dc2cccc79d.png",
+            "https://blog.bookbaby.com/wp-content/uploads/2015/11/Perceptions.jpg"
+          ]
+          prod.description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+          prod.comments=[{
+            "buyerName":"Akash Kumar Singh",
+            "reviewTitle":"Nice Product!!",
+            "review":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambledssss",
+            "time":"14 Dec 2020",
+            "starsGiven":5,
+            "images":[
+              "https://miro.medium.com/max/9096/0*8CyXXWXRHJLkn72_.",
+              "https://images.financialexpress.com/2018/10/review.jpg"
+            ],
+          },
+          {
+            "buyerName":"Utkarsh Singh",
+            "reviewTitle":"Nice Product!!",
+            "review":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambledssss",
+            "time":"12 Aug 2020",
+            "starsGiven":4,
+            "images":[
+              "https://miro.medium.com/max/9096/0*8CyXXWXRHJLkn72_.",
+              "https://images.financialexpress.com/2018/10/review.jpg"
+            ]
+          },
+          {
+            "buyerName":"Arnab Goswami",
+            "reviewTitle":"Nice Product!!",
+            "review":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambledssss",
+            "time":"12 Aug 2020",
+            "starsGiven":5,
+            "images":[
+              "https://miro.medium.com/max/9096/0*8CyXXWXRHJLkn72_.",
+              "https://images.financialexpress.com/2018/10/review.jpg"
+            ]
+          },
+          {
+            "buyerName":"Arnab Goswami",
+            "reviewTitle":"Nice Product!!",
+            "review":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambledssss",
+            "time":"12 Aug 2020",
+            "starsGiven":5,
+            "images":[
+              "https://miro.medium.com/max/9096/0*8CyXXWXRHJLkn72_.",
+              "https://images.financialexpress.com/2018/10/review.jpg"
+            ]
+          },
+          {
+            "buyerName":"Arnab Goswami",
+            "reviewTitle":"Nice Product!!",
+            "review":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambledssss",
+            "time":"12 Aug 2020",
+            "starsGiven":1,
+            "images":[
+              "https://miro.medium.com/max/9096/0*8CyXXWXRHJLkn72_.",
+              "https://images.financialexpress.com/2018/10/review.jpg"
+            ]
+          }]
+          prod.totalRatings=prod.comments.length,
+          prod.totalReviews= calReviews(prod),
+          prod.rating=calRating(prod)
+      }
+    })
+    // console.log(Product[0].comments)
     
+    
+
     function calOff(item){
       // console.log(Number(item.MRP))
       var off = Number(item.MRP)-Number(item.price)
@@ -189,13 +246,42 @@ export const ProductDetails = ({navigation,route}) =>{
             <Text style={styles.ratingsText}>
               Ratings & Reviews
             </Text>
-
+            <View
+              style={{
+                borderBottomColor: 'grey',
+                borderBottomWidth: 0.5,
+                marginHorizontal:wp(-3),
+                marginTop:hp(1)
+              }}
+            />
+            <RatingContainer
+            item={item}
+            />
+            <View
+              style={{
+                borderBottomColor: 'grey',
+                borderBottomWidth: 0.5,
+                marginHorizontal:wp(-3),
+                marginTop:hp(1)
+              }}
+            />
           {
             item.comments.map((item,index)=>(
-            <ReviewContainer
-            item={item}
-            key={index}
-            />
+              <>
+                <ReviewContainer
+              item={item}
+              key={index}
+              />
+              <View
+              style={{
+                borderBottomColor: 'grey',
+                borderBottomWidth: 0.5,
+                marginHorizontal:wp(-3)
+
+              }}
+              />
+              </>
+            
             ))
           }
             
@@ -204,7 +290,22 @@ export const ProductDetails = ({navigation,route}) =>{
        
      </View>
      </ScrollView>
-    
+      <View style={styles.buttonContainer}>
+
+        <Button mode="contained" onPress={() => console.log('Pressed')}
+        style={styles.button}
+        color={AppColors.primary}
+        >
+          Buy Now
+        </Button>
+
+        <Button mode="contained" onPress={() => console.log('Pressed')}
+        style={styles.button}
+        color={AppColors.primary}
+        >
+          Add to Cart
+        </Button>
+      </View>
      
      </>
     
@@ -284,7 +385,23 @@ cardImage:{
     ratingsText:{
       ...material.body1,
       fontSize:18,
-    }
+    },
+    buttonContainer:{
+      backgroundColor:AppColors.white,
+      elevation:10,
+      height:hp(8),
+      flexDirection:'row',
+      alignItems:'center',
+      justifyContent:'center'
+    },
+    button:{
+      // elevation:0,
+      // height:hp(6),
+      width:wp(40),
+      marginHorizontal:wp(4)
+      // color:AppColors.primary,
+      // borderRadius:5
+  }
     
 
 })

@@ -13,6 +13,7 @@ import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import HomeStack from './HomeStack'
 import AuthStack from './AuthStack'
+import {ProductProvider} from '../Components/ProductProvider'
 
 const App = ()=> {
   const { user, setUser } = useContext(AuthContext);
@@ -39,7 +40,12 @@ const App = ()=> {
   return (
 
     <NavigationContainer>
-      {user ? <HomeStack /> : <AuthStack />}
+      {user ?
+      <ProductProvider>
+        <HomeStack /> 
+      </ProductProvider>
+      :
+    <AuthStack />}
     </NavigationContainer>
 
     

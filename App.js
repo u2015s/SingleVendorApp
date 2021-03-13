@@ -15,7 +15,6 @@ import HomeStack from './src/Navigation/HomeStack'
 import AuthStack from './src/Navigation/AuthStack'
 import Routes from './src/Navigation/Routes';
 import { AuthProvider } from './src/Navigation/AuthProvider';
-
 const App = ()=> {
   
   return (
