@@ -8,14 +8,14 @@ import Toolbar from '../Components/NavigationComponents/Toolbar'
 import { CommonActions } from '@react-navigation/native';
 import PriceDetailCard from '../Components/CartComponents/PriceDetailCard'
 import CartCard from '../Components/CartComponents/CartCard'
-
+import CartButton from '../Components/CartComponents/CartButton'
 export const OrderSummary = ({navigation,route}) =>{
     const {userDetail}= useContext(AuthContext)
     const [CartItems, setCartItems] = useState({...route.params.CartItems})
     const [totalPrice,setTotalPrice] = useState(0)
 
     useEffect(()=>{
-        console.log(route.params.CartItems)
+        // console.log(route.params.CartItems)
     },[])
    return(
      <>
@@ -69,7 +69,9 @@ export const OrderSummary = ({navigation,route}) =>{
                  navigation={navigation}
                  item={item}
                 //  removeItem={removeItem}
-                hideRemove={true}
+                 hideRemove={true}
+                 showButtons={false}
+
                  />
                  )}
                keyExtractor={item => item.id}
@@ -83,6 +85,32 @@ export const OrderSummary = ({navigation,route}) =>{
         </View>
         </ScrollView>
 
+        <CartButton
+        totalPrice={route.params.totalPrice}
+        onPressFn={()=>{console.log("hello")}}
+        ButtonText="Continue"
+        />
+        {/* <View style={styles.buttonContainer}>
+          <View style={styles.totalPriceView}> 
+                 <Text style={{...material.headline,fontWeight:'bold'}}>
+                 Rs {totalPrice}
+                 </Text>
+          </View>
+   
+          <View>
+             <Button mode="contained" onPress={() => {
+               // console.log(item)
+               // updateCart(item.id)
+               navigation.navigate('OrderSummary',{CartItems:CartItems,totalPrice:totalPrice})
+             }}
+             style={styles.button}
+             color={AppColors.primary}
+             >
+             Place Order
+             </Button>
+          </View>
+         
+         </View> */}
      </>
     
          )

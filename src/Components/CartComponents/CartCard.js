@@ -12,7 +12,7 @@ import StarRating from 'react-native-star-rating';
 import { Button } from 'react-native-paper'
 
 // const star = require('../../assests/star.png')
-export const CartCard = ({navigation,item,removeItem,hideRemove,addQty,decQty}) =>{
+export const CartCard = ({navigation,item,removeItem,hideRemove,addQty,decQty,showButtons}) =>{
   const [countVal,setCountVal]= useState(item.Qty)
 // const item = {
 //         id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",s
@@ -108,16 +108,24 @@ function ratingCompleted(rating) {
                 </Text>
             
                 <View style={styles.counterView}>
+                  {showButtons?
                   <TouchableOpacity style={styles.decButton} onPress={setValue}>
-                      <Text style={styles.decText}>
-                      ━
-                      </Text>
+                  <Text style={styles.decText}>
+                  ━
+                  </Text>
                   </TouchableOpacity>
+                  :<></>
+                  }
+                  
+
                   <Text
                   style={styles.countVal}
                   >
                     {item.Qty}
                   </Text>
+
+                  
+                  {showButtons?
                   <TouchableOpacity style={styles.decButton} onPress={() =>{
                     setCountVal(count=>{
                       addQty(item.id,count+1) 
@@ -129,6 +137,8 @@ function ratingCompleted(rating) {
                       +
                       </Text>
                   </TouchableOpacity>
+                  :<></>
+                  }
 
                 </View>
                 

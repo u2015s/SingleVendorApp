@@ -22,7 +22,7 @@ export const Cart = ({navigation}) =>{
   const [val1, updateState] = useState(false);
   useEffect(() => {
     if(Cart.size){
-      // setIsloading(false)
+      setIsloading(false)
       for (const k of Cart.values()) {
         Product.forEach((item)=>{
             if(item.id==k){
@@ -39,12 +39,12 @@ export const Cart = ({navigation}) =>{
     }
   }, []);
 
-  // useEffect(() => {
-  //  if(CartItems.length){
-  //    setIsloading(false)
-  //    console.log(CartItems)
-  //  }
-  // }, [CartItems]);
+  useEffect(() => {
+   if(CartItems.length){
+     setIsloading(false)
+    //  console.log(CartItems)
+   }
+  }, [CartItems]);
 
   function removeItem(id){
     removeCartItem(id)
@@ -118,7 +118,7 @@ function calLength(){
      showIconNoti={false}
      />
    
-    {/* {
+    {
     isloading ?
      <View style = {{
           position: 'absolute',
@@ -137,7 +137,7 @@ function calLength(){
       size={50} color={AppColors.primary} />
   </View>
     :
-    <> */}
+    <>
     
   {
         CartItems.length==0?
@@ -160,6 +160,7 @@ function calLength(){
                  item={item}
                  removeItem={removeItem}
                  hideRemove={false}
+                 showButtons={true}
                  />
                  )}
                keyExtractor={item => item.id}
@@ -185,7 +186,7 @@ function calLength(){
              <Button mode="contained" onPress={() => {
                // console.log(item)
                // updateCart(item.id)
-               navigation.navigate('OrderSummary',{CartItems:CartItems})
+               navigation.navigate('OrderSummary',{CartItems:CartItems,totalPrice:totalPrice})
              }}
              style={styles.button}
              color={AppColors.primary}
@@ -207,8 +208,8 @@ function calLength(){
    
     
   
-    {/* </>
-   } */}
+    </>
+   }
     
  
 

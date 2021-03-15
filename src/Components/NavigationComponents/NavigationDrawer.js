@@ -11,6 +11,7 @@ import {
     DrawerItem,
     DrawerContentScrollView,
   } from '@react-navigation/drawer';
+
 export const NavigationDrawer = ({navigation}) =>{
     const {logout} = useContext(AuthContext)
 
@@ -18,6 +19,7 @@ export const NavigationDrawer = ({navigation}) =>{
      <>
      
      <DrawerContentScrollView
+    //  style={{padding: 0}}
     >
        <View >
             <View style={styles.userSection}>
@@ -45,17 +47,23 @@ export const NavigationDrawer = ({navigation}) =>{
                 // color={'grey'}
                 // size={25}
                 // />)}
-                icon={({ focused, color, size }) => <Icon color={color} size={size} name={focused ? 'location-arrow' : 'location-arrow'} />}
+                icon={({ focused, color, size }) => <Icon color={color}                style={{marginLeft:wp(2)}}
+                style={{marginLeft:wp(2)}}
+                 size={size} name={focused ? 'location-arrow' : 'location-arrow'} />}
                 label="My orders"
                 labelStyle={styles.labelStyle}
                 onPress={(focused) => {navigation.closeDrawer()
                                     navigation.navigate('MyOrder')}}
                 activeTintColor={AppColors.primary}
+                style={styles.itemStyle}
+                // style={{backgroundColor:"red"}}
                 // inactiveBackgroundColor={AppColors.primary}
             />
             
             <DrawerItem
-                icon={() => ( <Icon
+                icon={() => (
+                <Icon
+                style={{marginLeft:wp(2)}}
                 name='list-alt'
                 color={'grey'}
                 size={25}
@@ -63,26 +71,31 @@ export const NavigationDrawer = ({navigation}) =>{
                 label="Wishlist"
                 labelStyle={styles.labelStyle}
                 onPress={() => {}}
+                style={styles.itemStyle}
             />
             <DrawerItem
                 icon={() => ( <Icon
                 name='user-friends'
+                style={{marginLeft:wp(2)}}
                 color={'grey'}
                 size={20}
                 />)}
                 label="Categories"
                 labelStyle={styles.labelStyle}
                 onPress={() => {}}
+                style={styles.itemStyle}
             />
             <DrawerItem
                 icon={() => ( <Icon
                 name='user-friends'
+                style={{marginLeft:wp(2)}}
                 color={'grey'}
                 size={20}
                 />)}
                 label="Offers"
                 labelStyle={styles.labelStyle}
                 onPress={() => {}}
+                style={styles.itemStyle}
             />
             </View>
         </View>
@@ -105,33 +118,39 @@ export const NavigationDrawer = ({navigation}) =>{
                 icon={() => ( <Icon
                 name='share'
                 color={'grey'}
+                style={{marginLeft:wp(2)}}
                 size={20}
                 />)}
                 label="About Us"
                 labelStyle={[styles.labelStyle, {marginLeft:wp('1%')}]}
                 onPress={() => {}}
+                style={styles.itemStyle}
             />
             <DrawerItem
                 icon={() => ( <Icon
                 name='info'
                 color={'grey'}
                 size={25}
+                style={{marginLeft:wp(2)}}
                 />)}
                 label="Account Settings"
                 onPress={(focused) => {
                     navigation.closeDrawer()
                     navigation.navigate('AccountSetting')}}
                 labelStyle={[styles.labelStyle, {marginLeft:wp('3.5%')}]}
+                style={styles.itemStyle}
             />
              <DrawerItem
                 icon={() => ( <Icon
                 name='mobile'
+                style={{marginLeft:wp(2)}}
                 color={'grey'}
                 size={24}
                 />)}
                 label="Help"
                 labelStyle={[styles.labelStyle,{marginLeft:wp('2.5%')}]}
                 onPress={() => {}}
+                style={styles.itemStyle}
             />
             {/* <DrawerItem
                 icon={() => ( <Icon
@@ -161,11 +180,13 @@ export const NavigationDrawer = ({navigation}) =>{
                     icon={() => ( <Icon
                     name='external-link-alt'
                     color={'grey'}
+                    style={{marginLeft:wp(2)}}
                     size={24}
                     />)}
                     label="SignOut"
                     labelStyle={[styles.labelStyle,]}
                     onPress={() =>{logout()}}
+                    style={styles.itemStyle}
                 />
                 </View>
             </View>
@@ -219,6 +240,15 @@ const styles = StyleSheet.create({
         flex:1,
         // marginVertical:'auto'
         // alignItems:'flex-end'
+    },
+    itemStyle:{
+        marginHorizontal:0,
+        marginVertical:0,
+        borderRadius:0,
+        // marginLeft:10
+        // paddingLeft:10,
+        // backgroundColor:'red'
+        // paddingHorizontal:wp(2)
     }
     // labelPos:{marginLeft:wp('3%')}
 })

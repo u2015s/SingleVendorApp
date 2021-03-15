@@ -101,6 +101,7 @@ export const Toolbar = ({title,onIconPress,showDrawer,navigation,showIconSearch,
               color={'white'}
               style={styles.iconStyle}
               backgroundColor={'transparent'}
+              onPress={()=>{navigation.navigate('SearchScreen')}}
               underlayColor="transparent" 
               />
               :<></>}

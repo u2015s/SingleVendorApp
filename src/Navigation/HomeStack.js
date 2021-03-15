@@ -13,7 +13,23 @@ import NavigationDrawer from '../Components/NavigationComponents/NavigationDrawe
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { CardStyleInterpolators } from '@react-navigation/stack';
 import {CartProvider,CartContext} from '../Components/CartProvider'
-
+import SearchScreen from './../screens/SearchScreen'
+const config = {
+    animation: 'spring',
+    config: {
+      stiffness: 1000,
+      damping: 500,
+      mass: 3,
+      overshootClamping: true,
+      restDisplacementThreshold: 0.01,
+      restSpeedThreshold: 0.01,
+    },
+  };
+  const forFade = ({ current }) => ({
+    cardStyle: {
+      opacity: current.progress,
+    },
+  });
 const Drawer = createDrawerNavigator()
 const DrawerNavigator = () => (
     <Drawer.Navigator
@@ -79,6 +95,13 @@ const HNavigator = ()=>(
                 name="Address"
                 component={Address}
                 />
+                <Homenavigator.Screen
+                name="SearchScreen"
+                component={SearchScreen}
+                options={{ cardStyleInterpolator: forFade }}
+
+                />
+                
         </Homenavigator.Navigator>
         // </CartProvider>
 
