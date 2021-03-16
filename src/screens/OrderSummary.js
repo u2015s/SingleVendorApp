@@ -11,12 +11,50 @@ import CartCard from '../Components/CartComponents/CartCard'
 import CartButton from '../Components/CartComponents/CartButton'
 export const OrderSummary = ({navigation,route}) =>{
     const {userDetail}= useContext(AuthContext)
-    const [CartItems, setCartItems] = useState({...route.params.CartItems})
+    const [CartItems, setCartItems] = useState([...route.params.CartItems])
     const [totalPrice,setTotalPrice] = useState(0)
+    const [, reRender] = useState(0);
+    const [val1, updateState] = useState(false);
 
     useEffect(()=>{
         // console.log(route.params.CartItems)
-    },[])
+        // console.log(CartItems)
+    })
+    function addQty(id,qty){
+        setCartItems(oldCart=>{
+         oldCart.forEach((item)=>{
+            if(item.id==id){
+              item.Qty=qty
+              console.log("itemqty",item.Qty)
+            }
+            // console.log(oldCart)
+        })
+        updateState(!val1)
+        
+        return (oldCart)
+        })
+      }
+      function decQty(id,qty){
+        setCartItems(oldCart=>{
+          oldCart.forEach((item)=>{
+            if(item.id==id){
+              if(item.Qty==1){
+                item.Qty=qty
+                // return 0
+              }else{
+              // item.Qty=qty
+              item.Qty=qty
+            }
+          }
+          
+        })
+         updateState(!val1)
+         return (oldCart)
+         })
+      
+      
+        
+      }
    return(
      <>
      <Toolbar
@@ -63,7 +101,7 @@ export const OrderSummary = ({navigation,route}) =>{
     
        <View>
            <FlatList
-               data={route.params.CartItems}
+               data={CartItems}
                renderItem={({item})=>(
                  <CartCard
                  navigation={navigation}
@@ -71,7 +109,8 @@ export const OrderSummary = ({navigation,route}) =>{
                 //  removeItem={removeItem}
                  hideRemove={true}
                  showButtons={false}
-
+                 decQty={decQty}
+                 addQty={addQty}
                  />
                  )}
                keyExtractor={item => item.id}
@@ -80,13 +119,14 @@ export const OrderSummary = ({navigation,route}) =>{
            <PriceDetailCard
            CartItems={route.params.CartItems}
            setPrice={setTotalPrice}
-          
+           decQty={decQty}
+           addQty={addQty}
            />
         </View>
         </ScrollView>
 
         <CartButton
-        totalPrice={route.params.totalPrice}
+        totalPrice={totalPrice}
         onPressFn={()=>{console.log("hello")}}
         ButtonText="Continue"
         />

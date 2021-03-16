@@ -27,6 +27,7 @@ function ratingCompleted(rating) {
 }
 
 useEffect(() => {
+  // console.log("30",CartItems)
   var totalPrice = 0
   var discountPrice = 0
   CartItems.forEach((item)=>{

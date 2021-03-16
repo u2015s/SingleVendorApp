@@ -226,10 +226,23 @@ export const ProductDetails = ({navigation,route}) =>{
          
       </View>
 
-      {/* <View style={styles.ratingsContainer}> 
+      <View style={styles.ratingsContainer}> 
+           <View style={styles.headerView}>
             <Text style={styles.ratingsText}>
-              Ratings & Reviews
-            </Text>
+                Ratings & Reviews
+              </Text>
+
+                <Button mode="contained" onPress={() => {
+              // console.log(item)
+              navigation.navigate('RateProduct')
+                }}
+                style={[styles.button,{ borderRadius:0, elevation:1}]}
+                color={AppColors.primary}
+                >
+                  Rate Product
+                </Button>
+           </View>
+
             <View
               style={{
                 borderBottomColor: 'grey',
@@ -269,14 +282,17 @@ export const ProductDetails = ({navigation,route}) =>{
             ))
           }
             
-      </View> */}
+      </View>
        {/* </View> */}
        
      </View>
      </ScrollView>
       <View style={styles.buttonContainer}>
 
-        <Button mode="contained" onPress={() => console.log('Pressed')}
+        <Button mode="contained" 
+        onPress={() => {
+        navigation.navigate('OrderSummary',{CartItems:[route.params.item]})
+        }}
         style={styles.button}
         color={AppColors.primary}
         >
@@ -388,7 +404,11 @@ cardImage:{
       width:wp(40),
       marginHorizontal:wp(4)
       // color:AppColors.primary,
-      // borderRadius:5
+  },
+  headerView:{
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between'
   }
     
 

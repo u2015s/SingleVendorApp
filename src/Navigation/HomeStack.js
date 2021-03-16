@@ -6,14 +6,15 @@ import ProductDetails from './../screens/ProductDetails'
 import OrderSummary from './../screens/OrderSummary'
 import AccountSettings from './../screens/AccountSettings'
 import EditProfileInfo from './../screens/EditProfileInfo'
+import SearchScreen from './../screens/SearchScreen'
 import Address from './../screens/Address'
+import RateProduct from './../screens/RateProduct'
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import NavigationDrawer from '../Components/NavigationComponents/NavigationDrawer'
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { CardStyleInterpolators } from '@react-navigation/stack';
 import {CartProvider,CartContext} from '../Components/CartProvider'
-import SearchScreen from './../screens/SearchScreen'
 const config = {
     animation: 'spring',
     config: {
@@ -101,7 +102,10 @@ const HNavigator = ()=>(
                 options={{ cardStyleInterpolator: forFade }}
 
                 />
-                
+                <Homenavigator.Screen
+                name="RateProduct"
+                component={RateProduct}
+                />
         </Homenavigator.Navigator>
         // </CartProvider>
 

@@ -9,10 +9,19 @@ import { CommonActions } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 const ResultCard=(item)=>{
+    // console.log(item)
     return(
         <>
         <View style={styles.itemView}>
-            <Text>
+             <Icon
+                name={"search"}
+                size={25}
+                color={'grey'}
+                backgroundColor={'transparent'}
+                underlayColor="transparent"
+                // style={{marginRight:wp(1)}}
+                />
+            <Text style={styles.searchTextStyle}>
                 {item.text}
             </Text>
         </View>
@@ -25,15 +34,20 @@ export const SearchScreen = ({navigation}) =>{
     const[showIcon,setShowIcon]= useState(false)
     const [searchText,setSearchText]= useState('')
     const inputEl = useRef(null);
-    const [Data,setData]= useState(["Search 1","Search 2"])
-    const [searchResult, setSearchResult]=useState([])
+    const [Data,setData]= useState(["Search 1","Sarn","minku","man"])
+    const [searchResult, setSearchResult]=useState(new Set())
 useEffect(() => {
     inputEl.current.focus();
+    setSearchResult(s=>{
+        var news = s.add('search String 1')
+        return news
+        })
 })
 
 useEffect(() => {
     if(searchText==''){
         setShowIcon(false)
+        setSearchResult(new Set())
     }else{
         setShowIcon(true)
         // console.log(searchText)
@@ -42,16 +56,19 @@ useEffect(() => {
 }, [searchText])
 
 function searchData(text){
+    var sr = new Set(searchResult)
 Data.forEach((s)=>{
-    if(s==text){
-        console.log(s)
-        setSearchResult(state=>{
-            var newState=[...state,text]
-            return newState
-        })
+    var n = s.toUpperCase().indexOf(text.toUpperCase())
+    if(n<1&&n>-1){
+        sr.add(s)
+    }else{
+        sr.delete(s)
+        
     }
 })
+setSearchResult(new Set(sr))
 }
+
    return(
      <>
      <View style={styles.container}>
@@ -89,13 +106,14 @@ Data.forEach((s)=>{
             </View>
         </View>
         <View style={styles.resultsView}>
-                {searchResult.length?
-                <> 
+                {searchResult.size?
+                <>
                 <FlatList
-                data={searchResult}
+                data={Array.from(searchResult)}
                 renderItem={({item})=>(
                 <ResultCard text={item}/>
                 )}
+                // key={index}
                 />
                 </>
                 :
@@ -151,10 +169,17 @@ const styles = StyleSheet.create({
     resultsView:{
     },
     itemView:{
-        // backgroundColor:'blue',
+        backgroundColor:'white',
         height:hp(8),
-        borderBottomWidth:1,
+        borderBottomWidth:0.5,
         borderBottomColor:'grey',
         padding:hp('2%'),
+        paddingLeft:wp(10),
+        flexDirection:'row',
+        alignItems:'center'
+    },
+    searchTextStyle:{
+        ...material.subheading,
+        marginLeft:wp(2)
     }
 })

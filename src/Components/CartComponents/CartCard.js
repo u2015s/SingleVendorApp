@@ -108,14 +108,14 @@ function ratingCompleted(rating) {
                 </Text>
             
                 <View style={styles.counterView}>
-                  {showButtons?
+                  {/* {showButtons? */}
                   <TouchableOpacity style={styles.decButton} onPress={setValue}>
                   <Text style={styles.decText}>
                   ━
                   </Text>
                   </TouchableOpacity>
-                  :<></>
-                  }
+                  {/* :<></>
+                  } */}
                   
 
                   <Text
@@ -125,7 +125,7 @@ function ratingCompleted(rating) {
                   </Text>
 
                   
-                  {showButtons?
+                  {/* {showButtons? */}
                   <TouchableOpacity style={styles.decButton} onPress={() =>{
                     setCountVal(count=>{
                       addQty(item.id,count+1) 
@@ -137,8 +137,8 @@ function ratingCompleted(rating) {
                       +
                       </Text>
                   </TouchableOpacity>
-                  :<></>
-                  }
+                  {/* :<></>
+                  } */}
 
                 </View>
                 

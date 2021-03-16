@@ -17,6 +17,7 @@ export const ProductProvider = ({ children }) =>{
           rating:3.5,
           totalRatings:5,
           totalReviews:5,
+          Qty:1
           },
           {
             id: "1247acbea-c1b1-46c2-aed5-3ad53abb28ba",
@@ -28,6 +29,7 @@ export const ProductProvider = ({ children }) =>{
             rating:5,
             totalRatings:5,
             totalReviews:5,
+            Qty:1
             }]
 
     }
