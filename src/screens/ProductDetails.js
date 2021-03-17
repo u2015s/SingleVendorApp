@@ -20,13 +20,42 @@ import { Button } from 'react-native-paper'
 
 export const ProductDetails = ({navigation,route}) =>{
   // const [cart, updateCart] = useState({})
-  const { cart, updateCart } = useContext(CartContext)
+  const [item,setProduct] =useState({})
+  // const [itemDetail,setItemDetail]= useState()
+  const {cart, updateCart } = useContext(CartContext)
   const [addCart,setaddCart]= useState(false)
     // console.log(route.params.item)
-    const {Product}=useContext(ProductContext)
+    const {Product,getProductDetails,getReviews}=useContext(ProductContext)
     const [heartIcon,setHeartIcon]=useState(true)
-    var item
-   
+    var item1 = route.params.item
+    function defn(e){
+      // setProduct(i=>{
+      //   var newObj = Object.assign(e,i)
+      //   return newObj
+      // })
+      item1 = Object.assign(e,item1)
+      setProduct(item1)
+    }
+    function refn(e){
+      // setProduct(i=>{
+      //   i.reviews = e
+      //   return i
+      // })
+      item1.reviews = e
+      // console.log("2",item1)
+      setProduct(item1)
+
+    }
+   useEffect( ()  => {
+   getProductDetails(route.params.item.id,defn)
+   getReviews(route.params.item.id,refn)
+   },[])
+
+   useEffect(()=>{
+     console.log(item)
+   },[item])
+
+
     function calReviews(item){
       var reviews=0
       item.comments.forEach((item)=>{
@@ -47,33 +76,33 @@ export const ProductDetails = ({navigation,route}) =>{
       return (rating/num)
     }
 
-    Product.forEach((prod)=>{
-      if(prod.id==route.params.item.id){
-          prod.moreimages=[
-            route.params.item.src,
-            "https://i.pinimg.com/originals/8a/56/a9/8a56a9922e8339f7be5536dc2cccc79d.png",
-            "https://blog.bookbaby.com/wp-content/uploads/2015/11/Perceptions.jpg"
-          ]
-          prod.description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-          prod.comments=[{
-            "buyerName":"Akash Kumar Singh",
-            "reviewTitle":"Nice Product!!",
-            "review":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambledssss",
-            "time":"14 Dec 2020",
-            "starsGiven":5,
-            "images":[
-              "https://miro.medium.com/max/9096/0*8CyXXWXRHJLkn72_.",
-              "https://images.financialexpress.com/2018/10/review.jpg"
-            ],
-          },
-          ]
-          prod.totalRatings=prod.comments.length,
-          prod.totalReviews= calReviews(prod),
-          prod.rating=calRating(prod)
+    // Product.forEach((prod)=>{
+    //   if(prod.id==route.params.item.id){
+    //       prod.moreimages=[
+    //         route.params.item.src,
+    //         "https://i.pinimg.com/originals/8a/56/a9/8a56a9922e8339f7be5536dc2cccc79d.png",
+    //         "https://blog.bookbaby.com/wp-content/uploads/2015/11/Perceptions.jpg"
+    //       ]
+    //       prod.description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+    //       prod.reviews=[{
+    //         "buyerName":"Akash Kumar Singh",
+    //         "reviewTitle":"Nice Product!!",
+    //         "review":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambledssss",
+    //         "time":"14 Dec 2020",
+    //         "starsGiven":5,
+    //         "images":[
+    //           "https://miro.medium.com/max/9096/0*8CyXXWXRHJLkn72_.",
+    //           "https://images.financialexpress.com/2018/10/review.jpg"
+    //         ],
+    //       },
+    //       ]
+    //       prod.totalRatings=prod.comments.length,
+    //       prod.totalReviews= calReviews(prod),
+    //       prod.rating=calRating(prod)
 
-          item = prod
-      }
-    })
+    //       item = prod
+    //   }
+    // })
     // console.log(Product[0].comments)
     
     
@@ -119,11 +148,9 @@ export const ProductDetails = ({navigation,route}) =>{
     }
    return(
      <>
-     {/* <CartContext.Consumer>
-     {({Cart}) => ( */}
+    
      <Toolbar
             title={'Product Details'}
-            // cartItemNumbers={Cart.size}
             navigation={navigation}
             onIconPress={()=>{navigation.dispatch(CommonActions.goBack())}}
             showDrawer={false}
@@ -131,26 +158,16 @@ export const ProductDetails = ({navigation,route}) =>{
             showIconSearch={true}
             showIconNoti={false}
       /> 
-       {/* )} */}
-        
-        {/* </CartContext.Consumer> */}
+   {
+     (item.Description&&item.reviews)?
      <ScrollView
      contentContainerStyle={styles.container}
-    >
-    {/* <CartProvider> */}
-    {/* <CartProvider> */}
-           
-    {/* </CartProvider> */}
-
-      
-         
-    {/* </CartProvider> */}
-    
+      >
 
      <View style={styles.container}>
        {/* <View style={styles.imageContainer}> */}
        <ProductImageList
-              data={item.moreimages}
+              data={item.moreImages}
               />
       <View style={styles.iconContainer}>
         <Icon.Button
@@ -210,7 +227,7 @@ export const ProductDetails = ({navigation,route}) =>{
               renderRevealedFooter={_renderRevealedFooter}
               onReady={_handleTextReady}>
               <Text style={styles.descriptionText}>
-              {item.description}
+              {item.Description}
 
               </Text>
             </ReadMore>
@@ -262,24 +279,43 @@ export const ProductDetails = ({navigation,route}) =>{
                 marginTop:hp(1)
               }}
             />
-          {
-            item.comments.map((item,index)=>(
-              <>
-                <ReviewContainer
-              item={item}
-              key={index}
-              />
-              <View
-              style={{
-                borderBottomColor: 'grey',
-                borderBottomWidth: 0.5,
-                marginHorizontal:wp(-3)
 
-              }}
-              />
-              </>
+           
+          {
+           item.reviews?
+           <>
+           {
+              item.reviews.map((item,index)=>{
+                if(item.review){
+                  return(
+                    <>
+                    <ReviewContainer
+                    item={item}
+                    key={index}
+                    />
+                    <View
+                    style={{
+                      borderBottomColor: 'grey',
+                      borderBottomWidth: 0.5,
+                      marginHorizontal:wp(-3)
+    
+                    }}
+                    />
+                    </>
+    
+                  )
+                }
+                })
+           }
+           
+           
+           </>:<>
+           <Text>
+             Loading
+           </Text>
+           </>
+
             
-            ))
           }
             
       </View>
@@ -287,6 +323,14 @@ export const ProductDetails = ({navigation,route}) =>{
        
      </View>
      </ScrollView>
+     :<>
+     <Text>
+       Loading
+     </Text>
+     </>
+   }
+   
+     
       <View style={styles.buttonContainer}>
 
         <Button mode="contained" 

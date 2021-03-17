@@ -8,7 +8,7 @@ import Toolbar from '../NavigationComponents/Toolbar'
 import { CommonActions } from '@react-navigation/native';
 import StarRating from 'react-native-star-rating';
 
-export const StarRatingComponent = ({navigation,item}) =>{
+export const StarRatingComponent = ({navigation,item,containerStyle}) =>{
   const [starCount,setStartCount]= useState(2.7)
   function onStarRatingPress(rating) {
     
@@ -25,6 +25,7 @@ export const StarRatingComponent = ({navigation,item}) =>{
         activeOpacity={1}
         starSize={20}
         starStyle={{color:AppColors.primary}}
+        containerStyle={containerStyle}	
       />
 
      </View>

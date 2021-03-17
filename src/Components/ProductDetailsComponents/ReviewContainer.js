@@ -15,7 +15,7 @@ export const ReviewContainer = ({navigation,item}) =>{
         <View style={styles.thirdContainer}>
             <View style={styles.starContainer}>
                 <Text style={styles.starText}>
-                    {item.starsGiven}
+                    {item.rating}
                 </Text>
                 <Icon
                 name={'star'}
@@ -24,7 +24,7 @@ export const ReviewContainer = ({navigation,item}) =>{
                 />
             </View>
             <Text style={styles.title}>
-                {item.reviewTitle}
+                {item.title}
             </Text>
         </View>
         <View style={styles.SecondContainer}>
@@ -51,8 +51,8 @@ export default ReviewContainer
 
 const styles = StyleSheet.create({
     commentContainer:{
-        marginTop:hp(1),
-        height:hp(18),
+        marginVertical:hp(1),
+        // height:hp(18),
         paddingHorizontal:hp(1),
         paddingVertical:wp(0.5),
     //   borderWidth:0.5,
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
         color:'black'
     },
     thirdContainer:{
-        marginTop:hp(0.5),
+        marginVertical:hp(0.5),
         flexDirection:'row',
         alignItems:'center'
     },

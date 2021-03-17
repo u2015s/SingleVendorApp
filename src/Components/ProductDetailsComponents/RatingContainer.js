@@ -12,8 +12,8 @@ export const RatingContainer = ({navigation,item}) =>{
 
     function callTotalrating(star){
         var count=0
-        item.comments.forEach((item)=>{
-            if(item.starsGiven==star){
+        item.reviews.forEach((item)=>{
+            if(item.rating==star){
                 count=count+1
             }
         })
