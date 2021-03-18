@@ -7,7 +7,7 @@ import {AuthContext} from '../../Navigation/AuthProvider'
 // import Toolbar from '../Components/Toolbar'
 import { CommonActions } from '@react-navigation/native';
 import Carousel, { Pagination }  from 'react-native-snap-carousel'
-export const ProductImageList = ({navigation,data}) =>{
+export const ProductImageList = ({navigation,data,firstImage}) =>{
     const [activeSlide,setActiveSlide]=useState(0)
     var Data=data
     function pagination () {

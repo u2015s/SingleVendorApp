@@ -73,7 +73,7 @@ export const NavigationDrawer = ({navigation}) =>{
                 onPress={() => {}}
                 style={styles.itemStyle}
             />
-            <DrawerItem
+            {/* <DrawerItem
                 icon={() => ( <Icon
                 name='user-friends'
                 style={{marginLeft:wp(2)}}
@@ -84,8 +84,8 @@ export const NavigationDrawer = ({navigation}) =>{
                 labelStyle={styles.labelStyle}
                 onPress={() => {}}
                 style={styles.itemStyle}
-            />
-            <DrawerItem
+            /> */}
+            {/* <DrawerItem
                 icon={() => ( <Icon
                 name='user-friends'
                 style={{marginLeft:wp(2)}}
@@ -96,7 +96,7 @@ export const NavigationDrawer = ({navigation}) =>{
                 labelStyle={styles.labelStyle}
                 onPress={() => {}}
                 style={styles.itemStyle}
-            />
+            /> */}
             </View>
         </View>
             <View style={styles.comItems}>
@@ -140,7 +140,7 @@ export const NavigationDrawer = ({navigation}) =>{
                 labelStyle={[styles.labelStyle, {marginLeft:wp('3.5%')}]}
                 style={styles.itemStyle}
             />
-             <DrawerItem
+             {/* <DrawerItem
                 icon={() => ( <Icon
                 name='mobile'
                 style={{marginLeft:wp(2)}}
@@ -151,7 +151,7 @@ export const NavigationDrawer = ({navigation}) =>{
                 labelStyle={[styles.labelStyle,{marginLeft:wp('2.5%')}]}
                 onPress={() => {}}
                 style={styles.itemStyle}
-            />
+            /> */}
             {/* <DrawerItem
                 icon={() => ( <Icon
                 name='address-book'
@@ -175,7 +175,6 @@ export const NavigationDrawer = ({navigation}) =>{
             </View>
             
             <View style={styles.buttonView}>
-                <View >
                 <DrawerItem
                     icon={() => ( <Icon
                     name='external-link-alt'
@@ -188,7 +187,6 @@ export const NavigationDrawer = ({navigation}) =>{
                     onPress={() =>{logout()}}
                     style={styles.itemStyle}
                 />
-                </View>
             </View>
             
     </DrawerContentScrollView>
@@ -235,10 +233,10 @@ const styles = StyleSheet.create({
         padding: wp('3%')
     },
     buttonView:{
-        // marginTop:hp2dp('25%'),
+        // marginTop:hp('%'),
         // backgroundColor: 'yellow',
         flex:1,
-        // marginVertical:'auto'
+        // marginTop:'auto'
         // alignItems:'flex-end'
     },
     itemStyle:{

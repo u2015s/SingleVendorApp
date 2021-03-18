@@ -10,19 +10,19 @@ import firestore from '@react-native-firebase/firestore';
 import { Button } from 'react-native-paper'
 
 export const AccountSettings = ({navigation,route}) =>{
-const {user}= useContext(AuthContext)
-const [userData,setuserData] = useState({})
-   useEffect(() => {
-    firestore()
-    .collection('users')
-    .doc(user.uid)
-    .get()
-    .then((res)=>{
-        // console.log(res.data())
-        setuserData(res.data())
-    })
-    .catch(e=>{console.log(e)});
-   },[])
+const {user,userDetail}= useContext(AuthContext)
+const [userData,setuserData] = useState(userDetail)
+//    useEffect(() => {
+//     firestore()
+//     .collection('users')
+//     .doc(user.uid)
+//     .get()
+//     .then((res)=>{
+//         // console.log(res.data())
+//         setuserData(res.data())
+//     })
+//     .catch(e=>{console.log(e)});
+//    },[])
 
    useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
@@ -150,6 +150,7 @@ const [userData,setuserData] = useState({})
     <View style = {styles.overlayLoadingContainer}>
     
     <ActivityIndicator 
+
                 size={50} color={AppColors.primary} />
     </View>
     }
@@ -198,15 +199,12 @@ const styles = StyleSheet.create({
     },
     overlayLoadingContainer:{
         position: 'absolute',
-        top: 0,
-        bottom: 0,
-        right: 0,
-        left: 0,
-        justifyContent:'center',
-        alignItems:'center',
-        zIndex: 1,
-        opacity: 0.4,
-        backgroundColor: 'black'
+          top: 0,
+          bottom: 0,
+          right: 0,
+          left: 0,
+          justifyContent:'center',
+          alignItems:'center',
      },
      innerAddressView:{
         // flexDirection:'row',

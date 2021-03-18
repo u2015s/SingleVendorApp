@@ -1,5 +1,5 @@
 import React,{ Component, useState, useEffect,useContext} from 'react'
-import {Alert,ActivityIndicator ,View,Text,StyleSheet,SafeAreaView, TextInput,Image,Pressable,TouchableOpacity,ScrollView} from 'react-native'
+import {Alert,ToastAndroid,ActivityIndicator ,View,Text,StyleSheet,SafeAreaView, TextInput,Image,Pressable,TouchableOpacity,ScrollView} from 'react-native'
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { material } from 'react-native-typography'
 import AppColors from '../../assests/AppColor'
@@ -21,6 +21,7 @@ import { Button } from 'react-native-paper'
 export const ProductDetails = ({navigation,route}) =>{
   // const [cart, updateCart] = useState({})
   const [item,setProduct] =useState({})
+  const [isloading,setIsLoading] = useState(true)
   // const [itemDetail,setItemDetail]= useState()
   const {cart, updateCart } = useContext(CartContext)
   const [addCart,setaddCart]= useState(false)
@@ -28,14 +29,6 @@ export const ProductDetails = ({navigation,route}) =>{
     const {Product,getProductDetails,getReviews}=useContext(ProductContext)
     const [heartIcon,setHeartIcon]=useState(true)
     var item1 = route.params.item
-    function defn(e){
-      // setProduct(i=>{
-      //   var newObj = Object.assign(e,i)
-      //   return newObj
-      // })
-      item1 = Object.assign(e,item1)
-      setProduct(item1)
-    }
     function refn(e){
       // setProduct(i=>{
       //   i.reviews = e
@@ -44,76 +37,31 @@ export const ProductDetails = ({navigation,route}) =>{
       item1.reviews = e
       // console.log("2",item1)
       setProduct(item1)
-
+      setIsLoading(false)
     }
-   useEffect( ()  => {
-   getProductDetails(route.params.item.id,defn)
-   getReviews(route.params.item.id,refn)
-   },[])
-
-   useEffect(()=>{
-     console.log(item)
-   },[item])
-
-
-    function calReviews(item){
-      var reviews=0
-      item.comments.forEach((item)=>{
-        if(item.review){
-          reviews=reviews+1
-        }
-      })
-      return reviews
-     
+    function defn(e){
+      // setProduct(i=>{
+      //   var newObj = Object.assign(e,i)
+      //   return newObj
+      // })
+      item1 = Object.assign(e,item1)
+      setProduct(item1)
+      getReviews(route.params.item.id,refn)
     }
-    function calRating(item){
-      var rating=0
-      var num=0
-      item.comments.forEach((item)=>{
-          rating=rating+item.starsGiven
-          num=num+1
-      })
-      return (rating/num)
-    }
-
-    // Product.forEach((prod)=>{
-    //   if(prod.id==route.params.item.id){
-    //       prod.moreimages=[
-    //         route.params.item.src,
-    //         "https://i.pinimg.com/originals/8a/56/a9/8a56a9922e8339f7be5536dc2cccc79d.png",
-    //         "https://blog.bookbaby.com/wp-content/uploads/2015/11/Perceptions.jpg"
-    //       ]
-    //       prod.description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-    //       prod.reviews=[{
-    //         "buyerName":"Akash Kumar Singh",
-    //         "reviewTitle":"Nice Product!!",
-    //         "review":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambledssss",
-    //         "time":"14 Dec 2020",
-    //         "starsGiven":5,
-    //         "images":[
-    //           "https://miro.medium.com/max/9096/0*8CyXXWXRHJLkn72_.",
-    //           "https://images.financialexpress.com/2018/10/review.jpg"
-    //         ],
-    //       },
-    //       ]
-    //       prod.totalRatings=prod.comments.length,
-    //       prod.totalReviews= calReviews(prod),
-    //       prod.rating=calRating(prod)
-
-    //       item = prod
-    //   }
-    // })
-    // console.log(Product[0].comments)
     
-    
+  //  useEffect( ()  => {
+  //  getProductDetails(route.params.item.id,defn)
+  //  },[])
 
-    function calOff(item){
-      // console.log(Number(item.MRP))
-      var off = Number(item.MRP)-Number(item.price)
-      var perOff = (off/Number(item.MRP))*100
-      // console.log(perOff)
-      return parseInt(perOff).toString() + "%"
-    }
+   useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      getProductDetails(route.params.item.id,defn)
+    });
+
+    return unsubscribe;
+  }, [navigation]);
+
+
     function onHeartPress(){
       setHeartIcon(!heartIcon)
     }
@@ -127,6 +75,7 @@ export const ProductDetails = ({navigation,route}) =>{
         .then((res) => { console.log(res) })
         .catch((err) => { err && console.log(err); });
     }
+
     function _renderTruncatedFooter(handlePress){
       return (
         <Text style={{color: AppColors.primary, marginTop: 5}} onPress={handlePress}>
@@ -159,7 +108,25 @@ export const ProductDetails = ({navigation,route}) =>{
             showIconNoti={false}
       /> 
    {
-     (item.Description&&item.reviews)?
+     (isloading)?
+      <View style = {{
+          position: 'absolute',
+          top: 0,
+          bottom: 0,
+          right: 0,
+          left: 0,
+          justifyContent:'center',
+          alignItems:'center',
+          // zIndex: 1,
+          // opacity: 0.4,
+          // backgroundColor: 'black'
+      }}>
+      <ActivityIndicator 
+      size={50} color={AppColors.primary} />
+    </View>
+     :<>
+    
+
      <ScrollView
      contentContainerStyle={styles.container}
       >
@@ -167,7 +134,8 @@ export const ProductDetails = ({navigation,route}) =>{
      <View style={styles.container}>
        {/* <View style={styles.imageContainer}> */}
        <ProductImageList
-              data={item.moreImages}
+              data={[item.src,...item.moreImages]}
+              // firstImage={item.src}
               />
       <View style={styles.iconContainer}>
         <Icon.Button
@@ -202,7 +170,7 @@ export const ProductDetails = ({navigation,route}) =>{
                     {"Rs "+item.MRP}
                 </Text>
                 <Text style={styles.offText}>
-                    {calOff(item)+' off'}
+                    {item.discount+'%'+' off'}
                 </Text>   
         </View>
         <View
@@ -282,7 +250,7 @@ export const ProductDetails = ({navigation,route}) =>{
 
            
           {
-           item.reviews?
+           item.reviews.length!=0?
            <>
            {
               item.reviews.map((item,index)=>{
@@ -313,6 +281,21 @@ export const ProductDetails = ({navigation,route}) =>{
            <Text>
              Loading
            </Text>
+            {/* <View style = {{
+                position: 'absolute',
+                top: 0,
+                bottom: 0,
+                right: 0,
+                left: 0,
+                justifyContent:'center',
+                alignItems:'center',
+                // zIndex: 1,
+                // opacity: 0.4,
+                // backgroundColor: 'black'
+            }}>
+            <ActivityIndicator 
+            size={50} color={AppColors.primary} />
+            </View> */}
            </>
 
             
@@ -323,15 +306,7 @@ export const ProductDetails = ({navigation,route}) =>{
        
      </View>
      </ScrollView>
-     :<>
-     <Text>
-       Loading
-     </Text>
-     </>
-   }
-   
-     
-      <View style={styles.buttonContainer}>
+     <View style={styles.buttonContainer}>
 
         <Button mode="contained" 
         onPress={() => {
@@ -347,6 +322,7 @@ export const ProductDetails = ({navigation,route}) =>{
           // console.log(item)
           setaddCart(true)
           updateCart(item.id)
+          ToastAndroid.show("Product Added to Cart", ToastAndroid.SHORT);
         }}
         style={styles.button}
         color={AppColors.primary}
@@ -354,6 +330,11 @@ export const ProductDetails = ({navigation,route}) =>{
           Add to Cart
         </Button>
       </View>
+     </>
+   }
+   
+     
+      
      
      </>
     

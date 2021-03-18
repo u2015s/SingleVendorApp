@@ -6,7 +6,19 @@ export const AuthContext = createContext({});
 export const AuthProvider = ({ children }) =>{
     const [user, setUser] = useState(null);
     const [userDetail, setuserDetail] = useState(null);
-
+    // useEffect(()=>{
+    //   if(user){
+    //     firestore()
+    //     .collection('users')
+    //     .doc(user.uid)
+    //     .get()
+    //     .then((res)=>{
+    //         // console.log(res.data())
+    //         setuserDetail(res.data())
+    //     })
+    //     .catch(e=>{console.log(e)});
+    //   }
+    // },[])
     function getDetails(user){
 
       if(user){

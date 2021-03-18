@@ -7,7 +7,10 @@ import {AuthContext} from '../../Navigation/AuthProvider'
 import Toolbar from '../NavigationComponents/Toolbar'
 import { CommonActions } from '@react-navigation/native';
 export const CategoryList = ({navigation}) =>{
+// const [Data,setData]= useState([])
+// useEffect(()=>{
 
+// })
     const Data =[
     {
         name:"Shirts",
@@ -17,36 +20,18 @@ export const CategoryList = ({navigation}) =>{
         icon:"https://cdn.shopify.com/s/files/1/0023/9901/0881/products/M-Coburn-Pant-Storm-Cloud_5f952c4f-d899-484f-b891-acf4f37f6269_1400x1400.jpg?v=1582657066"
     },
     {
-        name:"Sarees",
-        icon:"https://images-na.ssl-images-amazon.com/images/I/41hjoh3kP9L._UX425_.jpg"
+        name:"Books",
+        icon:"https://lh3.googleusercontent.com/proxy/3hFP9blLU5rdGDJkdh0oMHpVn4mp0CX4SQ4DUSwZvW8--VywcPdDvUjfwRWW9Gy6XrR9huKcmgDikECOXLLjMs0dyucLEDB5Do6XID4S_jCCqbHOso362-gFwA"
     },
     {
-        name:"T Shirts",
-        icon:"https://images-na.ssl-images-amazon.com/images/I/71qwtY5GUyL._UX679_.jpg"
+        name:"Electronics",
+        icon:"https://images.herzindagi.info/image/2020/Apr/Electronics.jpg"
     },
     {
-        name:"coats",
-        icon:"https://images-na.ssl-images-amazon.com/images/I/61T78tVFAFL._AC_UX385_.jpg"
-    },
-    {
-        name:"Shirts",
-        icon:"https://images-na.ssl-images-amazon.com/images/I/71DBklVte9L._UL1200_.jpg"
-    },{
-        name:"Pants",
-        icon:"https://cdn.shopify.com/s/files/1/0023/9901/0881/products/M-Coburn-Pant-Storm-Cloud_5f952c4f-d899-484f-b891-acf4f37f6269_1400x1400.jpg?v=1582657066"
-    },
-    {
-        name:"Sarees",
-        icon:"https://images-na.ssl-images-amazon.com/images/I/41hjoh3kP9L._UX425_.jpg"
-    },
-    {
-        name:"T Shirts",
-        icon:"https://images-na.ssl-images-amazon.com/images/I/71qwtY5GUyL._UX679_.jpg"
-    },
-    {
-        name:"coats",
-        icon:"https://images-na.ssl-images-amazon.com/images/I/61T78tVFAFL._AC_UX385_.jpg"
-    },
+      name:"shoes",
+      icon:"https://freepngimg.com/thumb/adidas_shoes/1-2-adidas-shoes-png.png"
+  },
+    
     ]
     const HItem = ({name,icon,onPress}) => (
 
@@ -61,6 +46,7 @@ export const CategoryList = ({navigation}) =>{
               //   source={require('../../../lib/order.png')}
                 source={{uri:icon}}
                 style={styles.Himage}
+                resizeMode='contain'
                 />
               </View>
       
@@ -133,7 +119,7 @@ const styles = StyleSheet.create({
         // marginLeft:wp('-20%'),
         // marginBottom:hp('1%'),
         paddingBottom:hp('1%'),
-        marginHorizontal: wp('-0.5%'),
+        // marginHorizontal: wp('-0.5%'),
         width:wp('20%'),
         // marginRight:wp('2%'),
         // marginLeft:wp('5%'),

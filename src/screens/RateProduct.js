@@ -10,11 +10,11 @@ import { Button } from 'react-native-paper'
 // import StarRating from '../Components/ProductDetailsComponents/StarRating'
 import StarRating from 'react-native-star-rating';
 import firestore from '@react-native-firebase/firestore';
-
+import {AuthContext} from '../Navigation/AuthProvider'
 export const RateProduct = ({navigation}) =>{
     const [review,setReview]=useState('')
     const [oreview,setoReview]=useState('')
-
+    const {userDetail}=useContext(AuthContext)
     const [starCount,setStartCount]= useState(0)
     const [ratingText,setRatingText]= useState('Give a Rating')
     function onStarRatingPress(rating) {
@@ -34,24 +34,25 @@ export const RateProduct = ({navigation}) =>{
       }
     }
     function submitRating(){
-        // var data= {
-        //     buyerName:"Sam Bill",
-        //     rating:1,
-        //     review:'',
-        //     // review:"Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        //     title: "Don't Buy!!"
-        //     }
-        // firestore()
-        // .collection('products')
-        // .doc('Uv2d5NFiKHujaN45uY3A')
-        // .collection('reviews')
-        // .doc()
-        // .set(data)
-        // .then((res)=>{
-        //     // console.log(res.data())
-        //     console.log(res)
-        // })
-        // .catch(e=>{console.log(e)});
+        console.log(userDetail)
+        var data= {
+            buyerName:"Prakash",
+            rating:starCount,
+            review:review,
+            // review:"Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+            title: oreview
+            }
+        firestore()
+        .collection('products')
+        .doc('Uv2d5NFiKHujaN45uY3A')
+        .collection('reviews')
+        .doc()
+        .set(data)
+        .then((res)=>{
+            // console.log(res.data())
+            console.log(res)
+        })
+        .catch(e=>{console.log(e)});
       }
     
    return(

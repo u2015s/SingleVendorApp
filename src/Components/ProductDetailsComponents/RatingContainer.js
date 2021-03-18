@@ -9,7 +9,24 @@ import { CommonActions } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons'
 import RatingBar from './RatingBar'
 export const RatingContainer = ({navigation,item}) =>{
+const [totalRating,setTotalRating]=useState(0)    
+const [totalReview,setReviews]=useState(0)    
 
+useEffect(()=>{
+    var count =0
+    var review = 0
+    item.reviews.forEach((item)=>{
+            count=count+item.rating
+            if(item.review)
+            {
+                review = review +1 
+            }
+            
+    })
+    // totalRating = count/item.reviews.length
+    setReviews(review)
+    setTotalRating(count/item.reviews.length)
+})
     function callTotalrating(star){
         var count=0
         item.reviews.forEach((item)=>{
@@ -43,7 +60,7 @@ const ratingObj=[{
         <View style={styles.starContainer}>
             <View style={styles.starRatingContainer}>
                 <Text style={styles.starText}>
-                        {item.rating}
+                        {totalRating}
                     </Text>
                     <Icon
                     name={'star'}
@@ -54,7 +71,7 @@ const ratingObj=[{
                    
             <View style={styles.ratingAndReviewContainer}>
                 <Text style={styles.bothText}>
-                        {item.totalRatings + " Ratings"} & {"\n"+item.totalReviews + " Reviews"}
+                        {+item.reviews.length+ " Ratings"} & {"\n"+totalReview + " Reviews"}
                 </Text>
             </View>
         </View>
