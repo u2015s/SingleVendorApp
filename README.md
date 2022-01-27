@@ -6,16 +6,16 @@ Single Vendor App can be used by a owner of a shop to sell his products.
 ## Link
 [Crowdfunding Website](https://crowdfundingweb.herokuapp.com/) -->
 
-## Features🌟 
+## Features
 
 
-## Tech Stack👨‍💻
+## Tech Stack
 
 * React Native
 * Firebase 
 
 
-## Screenshots📷 
+## Screenshots
 <!-- ![alt text](https://user-images.githubusercontent.com/43993645/117760086-a160e680-b242-11eb-8ca3-aed0a1a5b38c.png "Home 1") -->
 
 <img src="https://user-images.githubusercontent.com/43993645/117760086-a160e680-b242-11eb-8ca3-aed0a1a5b38c.png" width="30%" height="100%">
