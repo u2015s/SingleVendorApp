@@ -1,8 +1,33 @@
-# SingleVendorApp
+# Single Vendor App 📱
+
+## Description
+Single Vendor App can be used by a owner of a shop to sell his products.
+<!-- 
+## Link
+[Crowdfunding Website](https://crowdfundingweb.herokuapp.com/) -->
+
+## Features🌟 
+
+* User can see the ongoing campaigns on the landing page.
+* User can click the campaign they want to support and will be directed to that specific campaign`s page where they can see the brief campaign details.
+* User can then support campaign by clicking on **DONATE NOW** button,via PayTM gateway.
+* User can see the transaction status and donation amount on individual campaign`s **PROUD DONORS LIST**,ensuring privacy of donor.
+* Campaigns **DONATE NOW** button is automatically disbaled, if the campaign is completed, thus preventing donor to donate to wrong campaigns. 
+
+## Tech Stack👨‍💻
+
 This App is made using React Native and Firebase
+**MERN** stack is used for development of this website
 
-#Screenshots of the App
+* [React](https://reactjs.org/)
+* [Express.js](https://expressjs.com/)
+* [Node.js](https://nodejs.org/en/)
+* [MongoDB](https://www.mongodb.com/)
 
+
+## Screenshots📷 
+<!-- ![alt text](https://github.com/PRATEEKVERMA-036/CROWDFUNDING-WEBSITE/blob/master/Crowfunding%20ss/AdminPage-3.PNG "AdminPage-3")
+ -->
 <img src="https://user-images.githubusercontent.com/43993645/117760086-a160e680-b242-11eb-8ca3-aed0a1a5b38c.png" width="30%" height="100%">
 
 <img src="https://user-images.githubusercontent.com/43993645/117760295-09173180-b243-11eb-8a55-2edefca51a9a.png" width="30%" height="100%">
