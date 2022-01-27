@@ -8,21 +8,11 @@ Single Vendor App can be used by a owner of a shop to sell his products.
 
 ## Features🌟 
 
-* User can see the ongoing campaigns on the landing page.
-* User can click the campaign they want to support and will be directed to that specific campaign`s page where they can see the brief campaign details.
-* User can then support campaign by clicking on **DONATE NOW** button,via PayTM gateway.
-* User can see the transaction status and donation amount on individual campaign`s **PROUD DONORS LIST**,ensuring privacy of donor.
-* Campaigns **DONATE NOW** button is automatically disbaled, if the campaign is completed, thus preventing donor to donate to wrong campaigns. 
 
 ## Tech Stack👨‍💻
 
-This App is made using React Native and Firebase
-**MERN** stack is used for development of this website
-
-* [React](https://reactjs.org/)
-* [Express.js](https://expressjs.com/)
-* [Node.js](https://nodejs.org/en/)
-* [MongoDB](https://www.mongodb.com/)
+* React Native
+* Firebase 
 
 
 ## Screenshots📷 
