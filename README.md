@@ -7,7 +7,10 @@ Single Vendor App can be used by a owner of a shop to sell his products.
 [Crowdfunding Website](https://crowdfundingweb.herokuapp.com/) -->
 
 ## Features
-
+1. Authentication (Register, Sign In, Sign Out).
+2. Listing of products in the App in different categories.
+3. Add products to cart
+4. Search different products
 
 ## Tech Stack
 
