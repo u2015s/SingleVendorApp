@@ -30,3 +30,6 @@ Single Vendor App can be used by a owner of a shop to sell his products.
 <img src="https://user-images.githubusercontent.com/43993645/117760424-3a8ffd00-b243-11eb-9873-c322c581beea.png" width="30%" height="100%">
 
 <img src="https://user-images.githubusercontent.com/43993645/117760489-57c4cb80-b243-11eb-8ba9-213c3955d631.png" width="30%" height="100%">
+
+<img src="https://user-images.githubusercontent.com/43993645/160069245-b0455ec8-1a9e-451f-ace7-e0ce2c0d8908.png" width="30%" height="100%">
+
